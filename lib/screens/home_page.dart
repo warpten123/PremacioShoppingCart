@@ -22,7 +22,7 @@ class _MyWidgetState extends State<HomePage> {
       ),
       body: Center(
         child: ListView.builder(
-            itemCount: context.watch<Cart>().count,
+            itemCount: Provider.of<Cart>(context, listen: true).count,
             itemBuilder: ((context, index) {
               return Card(
                 child: ListTile(
@@ -34,9 +34,13 @@ class _MyWidgetState extends State<HomePage> {
                       shape: BoxShape.circle,
                     ),
                     child: Center(
-                      child: Text(
-                        "${context.read<Cart>().shoppingList[index][0].toUpperCase()}",
-                        style: TextStyle(fontSize: 25.0),
+                      child: Consumer<Cart>(
+                        builder: (context, Cart, child) {
+                          return Text(
+                            "${Cart.shoppingList[index][0].toUpperCase()}",
+                            style: TextStyle(fontSize: 25.0),
+                          );
+                        },
                       ),
                     ),
                   ),

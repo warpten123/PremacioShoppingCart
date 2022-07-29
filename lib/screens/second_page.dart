@@ -39,7 +39,8 @@ class _SecondPageState extends State<SecondPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
-                      context.read<Cart>().addtoCart(_titleController.text);
+                      Provider.of<Cart>(context, listen: false)
+                          .addtoCart(_titleController.text);
                     }),
               )
             ],
